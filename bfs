@@ -1,0 +1,33 @@
+tree_data = {
+    'A':[('B'),('C')],
+    'B':[('D'),('E')],
+    'C':[('E')],
+    'D':[('F')],
+    'E':[('F')],
+    'F':[('G')],
+    'G':[]
+}
+def bfs (start,goal):
+    queue=[[start]] # [['A']]
+    vistited=set()
+
+    while queue : 
+        path=queue.pop(0) #['A']
+        node=path[-1] # 'A'
+
+        if node == goal:
+            return path
+        
+        if node in vistited :
+            continue
+        vistited.add(node)
+
+        for next_node in tree_data.get(node,[]):
+            new_path=path.copy()# ['A']
+            new_path.append(next_node)# ['A','C']
+            queue.append(new_path)# [['A','B'],['A','C']]
+        
+    return None
+
+sol = bfs('A','G')
+print(f"the path of bfs is {sol}")
