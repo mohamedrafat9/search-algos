@@ -1,0 +1,49 @@
+tree_data = {
+    'A': ['B', 'C'],
+    'B': ['D', 'E'],
+    'C': ['E'],
+    'D': ['F'],
+    'E': ['F'],
+    'F': ['G'],
+    'G': []
+}
+
+heuristics = {
+    'A': 7, 
+    'B': 6, 
+    'C': 4, 
+    'D': 5,
+    'E': 3, 
+    'F': 2, 
+    'G': 0
+}
+
+def hu(path):
+    lastnode = path[-1] 
+    return heuristics[lastnode]
+
+def greedy(start, goal):
+    pqueue = [[start]]  
+    visited = set()
+
+    while pqueue:
+        pqueue.sort(key=hu)
+        path = pqueue.pop(0)
+        node = path[-1]
+
+        if node in visited:
+            continue
+        visited.add(node)
+
+        if node == goal:
+            return path
+        
+        for next_node in tree_data.get(node, []):
+            new_path = path.copy()
+            new_path.append(next_node)  
+            pqueue.append(new_path)
+
+    return None
+
+sol = greedy('A', 'G')
+print(f"The path is {sol}")
