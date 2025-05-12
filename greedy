@@ -6,7 +6,8 @@ tree_data = {
     'E': [('F', 2)],
     'F': [('G', 1)],
     'G': []
-}
+} # if the question was with no cost edges and he ask for greedy you will need to fit  the whole code with this 
+# and its not a big problem , the lines down with mark ($) you will need to modify it 
 heuristics = {
     'A': 7, 
     'B': 6, 
@@ -16,25 +17,25 @@ heuristics = {
     'F': 2, 
     'G': 0
 }
-def totalCost(path): # just for reporting , will not effect in anything in greedy
+def totalCost(path): # just for reporting , will not effect in anything in greedy if the cost edges exists
     tot=0
     for i in path:
         tot+=i[1]
     return tot
     
 def hu(path):
-    lastnode=path[-1][0]
+    lastnode=path[-1]
     return heuristics[lastnode]
 
 def greedy(start,goal):
-    pqueue=[[(start,0)]]
+    pqueue=[[(start,0)]] # $ 
     visited=set() # we don't need to store the cost here , its optional if u want , thus i replaced the dic to set 
 
 
     while pqueue:
         pqueue.sort(key=hu)
-        path=pqueue.pop(0)
-        node=path[-1][0]
+        path=pqueue.pop(0) 
+        node=path[-1][0] #$
         
 
         if node in visited:
