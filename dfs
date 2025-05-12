@@ -1,0 +1,34 @@
+# dfs 
+tree_data = {
+    'A':[('C'),('B')],
+    'B':[('E'),('D')],
+    'C':[('E')],
+    'D':[('F')],
+    'E':[('F')],
+    'F':[('G')],
+    'G':[]
+}
+def dfs (start,goal):
+    stack=[[start]] # [['A']]
+    vistited=set()
+
+    while stack : 
+        path=stack.pop() #['A']
+        node=path[-1] # 'A'
+
+        if node == goal:
+            return path
+        
+        if node in vistited :
+            continue
+        vistited.add(node)
+
+        for next_node in tree_data.get(node,[]):
+            new_path=path.copy()# 
+            new_path.append(next_node)# ['A','B'] 
+            stack.append(new_path)# [['A','C'],['A','B']]
+        
+    return None
+
+sol = dfs('A','G')
+print(f"the path of dfs is {sol}")
