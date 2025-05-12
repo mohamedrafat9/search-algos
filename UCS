@@ -31,7 +31,7 @@ def ucs(start,goal):
             continue
         visited[node]=cost
 
-        if node in goals:
+        if node == goals:
             return path
         
         for (next_node,nodecost) in tree_data.get(node,[]):
@@ -41,8 +41,7 @@ def ucs(start,goal):
 
     return None
 
-goals=['A','B']
-sol=ucs('A',goals)
+sol=ucs('A','G')
 pcost=totalCost(sol)
 print(f"the path is {sol} and its cost is {pcost}")
 
